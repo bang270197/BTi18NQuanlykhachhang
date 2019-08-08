@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    Language:<a href="?lang=en">English</a>|<a href="?lang=vi">VietNam</a>
+    <form th:action="@{/search-province}" method="get">
+        <table>
+            <tr>
+                <td th:text="#{search}"></td>
+                <td><select name="province">
+                    <option th:each="p: ${provinces}"
+                    th:value="${p.id}"
+                            th:text="${p.name}"
+                    ></option>
+                </select></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="search"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<a th:href="@{/show-createCustomer}">Create new Customer</a>
+<h2><p th:text="#{titleName}"></p></h2>
+<table cellpadding="2" cellspacing="2" border="1px">
+    <tr>
+        <td th:text="#{firstName}">firstName</td>
+        <td th:text="#{lastName}"></td>
+        <td th:text="#{provinceName}"></td>
+        <td th:text="#{view}"></td>
+        <td th:text="#{submitedit}"></td>
+        <td th:text="#{submitDelete}"></td>
+    </tr>
+    <tr th:each="c: ${customers}">
+        <td th:text="${c.firstName}"></td>
+        <td th:text="${c.lastName}"></td>
+        <td th:text="${c.province.name}"></td>
+        <td><a th:href="@{/show-viewCustomer/__${c.getId()}__}">view</a></td>
+        <td><a th:href="@{/show-editCustomer/__${c.getId()}__}">edit</a></td>
+        <td><a th:href="@{/show-deleteCustomer/__${c.getId()}__}">delete</a></td>
+    </tr>
+</table>
+<div>
+    <a th:href="@{'/show-customer'(page=${customers.number - 1})}" th:if="${customers.hasPrevious()}">Previous</a>
+    <span th:text="${customers.number+1}"></span>/<span th:text="${customers.totalPages}"></span>
+    <a th:href="@{'/show-customer'(page=${customers.number+1})}" th:if="${customers.hasNext()}">Next</a>
+</div>
+</body>
+</html>

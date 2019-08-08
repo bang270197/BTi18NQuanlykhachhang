@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/show-customer}">Back list</a>
+<th:block th:if="${messagedelete}">
+    <p th:text="${messagedelete}" style="color: crimson"></p>
+</th:block>
+<form th:action="@{/delete-customer}" th:object="${customer}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <table cellpadding="2" cellspacing="2" border="1px">
+        <tr>
+            <td>firstName</td>
+            <td th:text="${customer.firstName}"></td>
+        </tr>
+        <tr>
+            <td>lastName</td>
+            <td th:text="${customer.lastName}"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="delete"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

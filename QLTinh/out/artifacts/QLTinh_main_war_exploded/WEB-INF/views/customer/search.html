@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/show-customer}">Back list</a>
+<h1 th:text="${searchProvince.name}"></h1>
+<div th:each="c : ${searchCustomer}">
+   firstName <p th:text=" ${c.firstName}"></p>
+    lastName<p th:text=" ${c.lastName}"></p>
+    <hr width="100px" style="background: crimson">
+</div>
+</body>
+</html>
